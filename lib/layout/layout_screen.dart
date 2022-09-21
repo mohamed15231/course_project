@@ -43,6 +43,7 @@ class LayoutScreen extends StatelessWidget {
                   icon: Image.asset("assets/icons/fav.png"),
                   label: "",
                 ),
+
                 BottomNavigationBarItem(
                   icon: Stack(
                     alignment: AlignmentDirectional.center,
