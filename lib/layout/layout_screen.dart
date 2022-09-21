@@ -1,4 +1,8 @@
+import 'package:course_project/layout/cubit/layout_cubit.dart';
+import 'package:course_project/layout/cubit/layout_state.dart';
+import 'package:course_project/shared/component/componet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // ignore: must_be_immutable
 class LayoutScreen extends StatelessWidget {
@@ -13,54 +17,54 @@ class LayoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xffF6F6F6),
-        elevation: 0,
-        leading: Image.asset("assets/icons/leadingicon.png"),
-        title: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.15),
-          child: Text(
-            "location".toUpperCase(),
-            style: Theme.of(context).textTheme.headline1,
-          ),
-        ),
-      ),
-      body: Container(
-        color: const Color(0xffF6F6F6),
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) =>
-              buildScreenLocation(url: layoutModel[index]),
-          itemCount: layoutModel.length,
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor:const Color(0xffF6F6F6) ,
-        elevation: 0.0,
-        type: BottomNavigationBarType.fixed,
-
-        items: [
-          BottomNavigationBarItem(
-              icon: Image.asset("assets/icons/home.png"), label: ""),
-          BottomNavigationBarItem(
-              icon: Image.asset("assets/icons/fav.png"), label: ""),
-          BottomNavigationBarItem(
-              icon: Stack(
-                alignment: AlignmentDirectional.center,
-                children: [
-                  Image.asset("assets/icons/location.png"),
-                  Image.asset("assets/icons/bag.png"),
-                ],
-              ), label: ""),
-          BottomNavigationBarItem(
-            icon: Image.asset("assets/icons/calendar.png"),
-            label: ""
-          ),
-          BottomNavigationBarItem(
-              icon: Image.asset("assets/icons/avatar.png"), label: ""),
-        ],
+    return BlocProvider(
+      create: (context) => AppCubit(),
+      child: BlocConsumer<AppCubit, CubitStates>(
+        listener: (BuildContext context, state) {},
+        builder: (context, state) {
+          var cubit = AppCubit.get(context);
+          return Scaffold(
+            appBar:
+                appBar(context: context, text: cubit.title[cubit.currentIndex]),
+            body: cubit.screen[cubit.currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: const Color(0xffF6F6F6),
+              elevation: 0.0,
+              type: BottomNavigationBarType.fixed,
+              onTap: (value) {
+                cubit.changeScree(value);
+              },
+              items: [
+                BottomNavigationBarItem(
+                  icon: Image.asset("assets/icons/home.png"),
+                  label: "",
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset("assets/icons/fav.png"),
+                  label: "",
+                ),
+                BottomNavigationBarItem(
+                  icon: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      Image.asset("assets/icons/location.png"),
+                      Image.asset("assets/icons/bag.png"),
+                    ],
+                  ),
+                  label: "",
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset("assets/icons/calendar.png"),
+                  label: "",
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset("assets/icons/avatar.png"),
+                  label: "",
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

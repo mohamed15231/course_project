@@ -2,11 +2,13 @@ import 'package:course_project/shared/component/componet.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class Home_Screen extends StatelessWidget {
+class CalenderScreen extends StatelessWidget {
+  const CalenderScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return  const Center(
-        child:Text("Tours")
+    return const Center(
+        child:Text("calender")
     );
   }
 
