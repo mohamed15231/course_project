@@ -25,7 +25,7 @@ class Data {
   dynamic phone;
   num? active;
   String? smsCode;
-  num? dateOfBirth;
+  dynamic dateOfBirth;
   String? gender;
   String? accessToken;
 

@@ -32,7 +32,8 @@ class RegisterScreen extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => LayoutScreen(),
                 ));
-            CacheHelper.postData(key: Constant.tokenKey, value:RegisterCubit.get(context).registerModel!.data!.accessToken);
+            tokenValue=RegisterCubit.get(context).loginModel!.data!.accessToken;
+            CacheHelper.postData(key: Constant.tokenKey, value:RegisterCubit.get(context).loginModel!.data!.accessToken);
           }
         },
         builder: (context, state) {

@@ -18,14 +18,14 @@ class LayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit(),
+      create: (context) => AppCubit()..getPlacesData(),
       child: BlocConsumer<AppCubit, CubitStates>(
         listener: (BuildContext context, state) {},
         builder: (context, state) {
           var cubit = AppCubit.get(context);
           return Scaffold(
             appBar:
-                appBar(context: context, text: cubit.title[cubit.currentIndex]),
+            cubit.currentIndex==0||cubit.currentIndex==4? null : appBar(context: context, text: cubit.title[cubit.currentIndex]),
             body: cubit.screen[cubit.currentIndex],
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor: const Color(0xffF6F6F6),
@@ -34,35 +34,7 @@ class LayoutScreen extends StatelessWidget {
               onTap: (value) {
                 cubit.changeScree(value);
               },
-              items: [
-                BottomNavigationBarItem(
-                  icon: Image.asset("assets/icons/home.png"),
-                  label: "",
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset("assets/icons/fav.png"),
-                  label: "",
-                ),
-
-                BottomNavigationBarItem(
-                  icon: Stack(
-                    alignment: AlignmentDirectional.center,
-                    children: [
-                      Image.asset("assets/icons/location.png"),
-                      Image.asset("assets/icons/bag.png"),
-                    ],
-                  ),
-                  label: "",
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset("assets/icons/calendar.png"),
-                  label: "",
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset("assets/icons/avatar.png"),
-                  label: "",
-                ),
-              ],
+              items:cubit.items,
             ),
           );
         },

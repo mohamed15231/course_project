@@ -1,3 +1,4 @@
+import 'package:course_project/shared/constant/constant.dart';
 import 'package:dio/dio.dart';
 
 class DioHelper {
@@ -5,9 +6,11 @@ class DioHelper {
 
   static Future<Response<dynamic>> getData({
     required String url,
-    required Map<String, dynamic> query,
+    Map<String, dynamic>? query,
 }) async{
+    print(tokenValue);
     dio.options.headers={
+      'Authorization':'Bearer $tokenValue',
       'Content-Type': 'application/json',
     };
     return await dio.get(url, queryParameters: query,);

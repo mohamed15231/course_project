@@ -1,12 +1,11 @@
-class LayoutModel {
+class ImageModel {
   String backImage;
   String forwardImage;
-  String topText;
-  String downText;
+  String text;
 
-  LayoutModel(
+  ImageModel(
       {required this.backImage,
       required this.forwardImage,
-      required this.topText,
-      required this.downText});
+      required this.text
+      });
 }

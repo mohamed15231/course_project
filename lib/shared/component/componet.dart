@@ -81,11 +81,13 @@ Future toastShow({
 AppBar appBar({
   required BuildContext context,
   required String text,
+  List<Widget>? action,
+  Widget? leading ,
 }) {
   return AppBar(
     backgroundColor: const Color(0xffF6F6F6),
     elevation: 0,
-    leading: Image.asset("assets/icons/leadingicon.png"),
+    leading:leading??Image.asset("assets/icons/leadingicon.png") ,
     title: Padding(
       padding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.15),
@@ -94,5 +96,6 @@ AppBar appBar({
         style: Theme.of(context).textTheme.headline1,
       ),
     ),
+    actions: action,
   );
 }

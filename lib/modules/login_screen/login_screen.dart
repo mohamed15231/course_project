@@ -34,6 +34,7 @@ class LoginScreen extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) =>  LayoutScreen(),
                 ));
+            tokenValue=LoginCubit.get(context).loginModel!.data!.accessToken;
             CacheHelper.postData(key: Constant.tokenKey, value:LoginCubit.get(context).loginModel!.data!.accessToken);
           }
         },

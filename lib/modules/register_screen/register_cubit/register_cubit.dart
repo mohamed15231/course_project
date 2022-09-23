@@ -1,3 +1,4 @@
+import 'package:course_project/model/login_models.dart';
 import 'package:course_project/model/register_model.dart';
 import 'package:course_project/modules/register_screen/register_cubit/register_state.dart';
 import 'package:course_project/shared/network/diohelper.dart';
@@ -8,7 +9,7 @@ class RegisterCubit extends Cubit<RegisterScreenStates> {
   RegisterCubit() : super(RegisterScreenInitialState());
 
   static RegisterCubit get(context) => BlocProvider.of(context);
-  RegisterModel? registerModel;
+  LoginModel? loginModel;
 
   void getRegisterData({
   required String firstName,
@@ -28,8 +29,8 @@ class RegisterCubit extends Cubit<RegisterScreenStates> {
       },
     ).then((value) {
       print(value.data);
-      registerModel=RegisterModel.fromJson(value.data);
-      print(registerModel!.data!.name);
+      loginModel=LoginModel.fromJson(value.data);
+      print(loginModel!.data!.name);
       emit(RegisterGetDataSuccessState());
     }).catchError((error){
       print(error);

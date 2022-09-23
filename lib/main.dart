@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:course_project/layout/cubit/layout_cubit.dart';
 import 'package:course_project/layout/layout_screen.dart';
 import 'package:course_project/modules/login_screen/login_screen.dart';
 import 'package:course_project/modules/onboarding.dart';
@@ -7,6 +8,7 @@ import 'package:course_project/shared/constant/constant.dart';
 import 'package:course_project/shared/flutter_bloc.dart';
 import 'package:course_project/shared/network/cache_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 void main() async{
@@ -38,27 +40,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) {
-        return MaterialApp(
-
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            textTheme:  TextTheme(
-              headline1: const TextStyle(
-                  fontFamily: 'Lato-Bold.ttf',
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24
+        return BlocProvider(
+          create: (BuildContext context) =>AppCubit(),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              textTheme:  TextTheme(
+                headline1: const TextStyle(
+                    fontFamily: 'Lato-Bold.ttf',
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24
+                ),
+                caption: TextStyle(
+                  fontFamily: 'Lato-Regular.ttf',
+                  fontSize: 12.sp,
+                ),
               ),
-              caption: TextStyle(
-                fontFamily: 'Lato-Regular.ttf',
-                fontSize: 12.sp,
-              ),
+              appBarTheme: AppBarTheme(),
+              primarySwatch: Colors.blue,
             ),
-            appBarTheme: AppBarTheme(),
-            primarySwatch: Colors.blue,
+            home:Splash_Screen( screen: screen,),
           ),
-          home:Splash_Screen( screen: screen,),
         );
       },
     );
